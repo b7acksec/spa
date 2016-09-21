@@ -1,13 +1,10 @@
-'use strict';
 const path = require('path')
-const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
-
 
 module.exports = {
 	entry: './web_client/app.js',
 	output: {
-       path: '${__dirname}/main/static',
+       path: `${__dirname}/main/static`,
        filename: 'app.js'
    	},
 	resolve: {
@@ -20,23 +17,14 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loader: ['babel'],
+				loader: 'babel',
 				include: [
 					path.resolve(__dirname, "web_client")
-				],
-				query: {
-					plugins: ['transform-runtime'],
-					presets: ['es2015', 'stage-0', 'react']
-				}
+				]
 			},
 			{
 				test: /\.s[a|c]ss$/,
-                loaders: [
-                    'style',
-                    'css',
-                    'postcss',
-                    'sass'
-				]
+                loader: 'style!css!postcss!sass'
 			}
 		]
 	},
@@ -48,5 +36,3 @@ module.exports = {
 	},
 	postcss: () => [autoprefixer({ browsers: ['> 1%'] })]
 }
-
-
